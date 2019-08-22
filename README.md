@@ -1,8 +1,8 @@
-#纯JS拖拽移动卡片网格
+# 纯JS拖拽移动卡片网格
 
 [TOC]
 
-##1.使用GridsterJS拖拽卡片问题
+## 1.使用GridsterJS拖拽卡片问题
 在阿里云quickBI上发现它的拖拽板面是自己改编过的GridsterJS
 
 **GridsterJS存在问题**（GridsterJS:http://dsmorse.github.io/gridster.js/#demos）
@@ -121,7 +121,8 @@ document.querySelector('body').onresize=function(){
     //调整网格大小
 gridCard1.resizeGrid();
 }
-
+gridCard1.exportStyle()//导出GridCard样式
+gridCard1.exportHtml()//导出GridCard的HTML
 ```
 
 **防重叠算法说明**
