@@ -1,0 +1,173 @@
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+	<style type="text/css">
+		#gridBody {
+		background:#EEE;
+			position: absolute;
+			height: 100%;
+			width: 50%;
+			overflow: auto;
+		}
+		
+		#gridBody1 {
+		
+			position: absolute;
+			height: 100%;
+			left:50%;
+			width: 50%;
+			overflow: auto;
+		}
+		#gridBody div.my-card {
+			height: 100%;
+			width: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 24px;			
+			box-shadow: 0 0 3px gray;
+		}
+
+		#gridBody1 div.my-card {
+			height: 100%;
+			width: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 24px;
+			background:black;
+			color:white;
+			box-shadow: 0 0 3px gray;
+		}
+
+		.circle-btn {
+			cursor: pointer;
+			position: absolute;
+			border-radius: 50%;
+			border: none;
+			background: #0099FF;
+			box-shadow: 0 0 4px gray;
+			color: white;
+			font-size: 18px;
+			height: 64px;
+			z-index: 9;
+			width: 64px;
+			outline: none;
+		}
+
+		.circle-btn:hover {
+			background: #00FFFF;
+		}
+
+		.circle-btn.red {
+			background: red;
+		}
+
+		.circle-btn.red:hover {
+			background: #CC3366;
+		}
+	</style>
+	<script src="GridCard.js"></script>
+</head>
+
+<body style="padding:0;margin:0;">
+	<section id="gridBody">
+		<button class="circle-btn" id="addCard" style="right:100px;top:10px;">添加卡片</button>
+
+		<div id="gridContainer" style="position: absolute; overflow: auto; ">
+			<div
+				style="position: relative; min-height: 100%; height: 936px; width: 1920px; left: 0px; top: 0px; z-index: 888; display: none; cursor: se-resize;">
+			</div>
+			<div data-sizex="6" data-sizey="6" data-col="4" data-row="1" style="position: absolute;">
+				<div class="my-card"><button class="circle-btn red" style="position:absolute;right:0;top:0;"
+						title="del">删除</button>0</div><span class="grid-card-resize-icon"></span>
+			</div>
+			<div data-sizex="3" data-sizey="3" data-col="1" data-row="7" style="position: absolute;">
+				<div class="my-card"><button class="circle-btn red" style="position:absolute;right:0;top:0;"
+						title="del">删除</button>1</div><span class="grid-card-resize-icon"></span>
+			</div>
+			<div data-sizex="3" data-sizey="3" data-col="1" data-row="4" style="position: absolute;">
+				<div class="my-card"><button class="circle-btn red" style="position:absolute;right:0;top:0;"
+						title="del">删除</button>2</div><span class="grid-card-resize-icon"></span>
+			</div>
+			<div data-sizex="3" data-sizey="3" data-col="1" data-row="1" style="position: absolute;">
+				<div class="my-card"><button class="circle-btn red" style="position:absolute;right:0;top:0;"
+						title="del">删除</button>3</div><span class="grid-card-resize-icon"></span>
+			</div>
+		</div>
+		
+		
+	</section>
+	
+	<section id="gridBody1">
+		<button class="circle-btn" id="addCard1" style="right:100px;top:10px;">添加卡片</button>
+
+		<div id="gridContainer1" style="position: absolute; overflow: auto; ">
+			<div
+				style="position: relative; min-height: 100%; height: 936px; width: 1920px; left: 0px; top: 0px; z-index: 888; display: none; cursor: se-resize;">
+			</div>
+			<div data-sizex="6" data-sizey="6" data-col="4" data-row="1" style="position: absolute;">
+				<div class="my-card"><button class="circle-btn red" style="position:absolute;right:0;top:0;"
+						title="del">删除</button>0</div><span class="grid-card-resize-icon"></span>
+			</div>
+			<div data-sizex="3" data-sizey="3" data-col="1" data-row="7" style="position: absolute;">
+				<div class="my-card"><button class="circle-btn red" style="position:absolute;right:0;top:0;"
+						title="del">删除</button>1</div><span class="grid-card-resize-icon"></span>
+			</div>
+			<div data-sizex="3" data-sizey="3" data-col="1" data-row="4" style="position: absolute;">
+				<div class="my-card"><button class="circle-btn red" style="position:absolute;right:0;top:0;"
+						title="del">删除</button>2</div><span class="grid-card-resize-icon"></span>
+			</div>
+			<div data-sizex="3" data-sizey="3" data-col="1" data-row="1" style="position: absolute;">
+				<div class="my-card"><button class="circle-btn red" style="position:absolute;right:0;top:0;"
+						title="del">删除</button>3</div><span class="grid-card-resize-icon"></span>
+			</div>
+		</div>
+		
+		
+	</section>
+</body>
+<script>
+	var count = 0;
+	var gridCard = new GridCard('gridContainer', {
+		actionColor: 'red',
+		actionCallback: function (e, card) {
+			if (e.target.title == "del") {
+				gridCard.removeCard(card);
+				return true;
+			}
+			return false;
+		}
+	});
+	document.getElementById('addCard').onclick = function (e) {
+		gridCard.addCard('<div class="my-card"><button class="circle-btn red" style="position:absolute;right:0;top:0;" title="del">删除</button>' + count + '</div>', { row: 1, col: 1, sizex: 3, sizey: 3 });
+		count++;
+	}
+	
+	var count = 0;
+	var gridCard1 = new GridCard('gridContainer1', {
+		unitW:5,
+	unitH:5,
+	maxRow:60,
+	maxCol:20,
+	maxWidth:20,
+	maxHeight:20,
+		actionColor: 'red',
+		actionCallback: function (e, card) {
+			if (e.target.title == "del") {
+				gridCard.removeCard(card);
+				return true;
+			}
+			return false;
+		}
+	});
+	document.getElementById('addCard1').onclick = function (e) {
+		gridCard1.addCard('<div class="my-card"><button class="circle-btn red" style="position:absolute;right:0;top:0;" title="del">删除</button>' + count + '</div>', { row: 1, col: 1, sizex: 3, sizey: 3 });
+		count++;
+	}
+</script>
+
+</html>
